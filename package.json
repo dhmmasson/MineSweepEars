@@ -1,0 +1,22 @@
+{
+  "name": "ld32",
+  "version": "1.0.0",
+  "description": "My first Ludum Dare Game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GameDhim/ld32.git"
+  },
+  "keywords": [
+    "LD32"
+  ],
+  "author": "Dhim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GameDhim/ld32/issues"
+  },
+  "homepage": "https://github.com/GameDhim/ld32"
+}
