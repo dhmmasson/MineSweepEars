@@ -12,9 +12,13 @@ function GameStart () {
 	//load Sounds stuff 
 	soundInit( main ) ;
 
-	UiInit( main ) ; 
+	
 
+	startAGame( main )
+	
+}
 
+function startAGame( main ) {
 
 	createSpots( main ) ;  
 	colorSpots( main ) ; 
@@ -25,7 +29,11 @@ function GameStart () {
 	main.currentMultiplier = 1 
 	main.currentScore = 0 
 	main.decayTimer = 0 
+	main.change = true ;
+	UiInit( main ) ; 
+
 	tick.apply( main )	
+
 }
 
 function norm (x,y) { return Math.sqrt( x*x + y*y ) }
@@ -162,7 +170,7 @@ function UiInit ( main ) {
 						prevScore = main.currentScore * main.currentMultiplier
 						main.currentScore += spot.countMine ; 
 						main.currentMultiplier *= 1 + spot.countMine / 10  ;
-						console.log( "+"+ main.currentScore * main.currentMultiplier  - prevScore )
+					//	console.log( "+"+ main.currentScore * main.currentMultiplier  - prevScore )
 					}
 				}
 			}
@@ -177,16 +185,7 @@ function UiInit ( main ) {
 
 		$(main.screen.canvas).on({ 'touchstart' : dragStart, 'touchmove' : dragMove,  'touchend' : dragEnd }) ;
 		firstTime = true 
-		$('body').on("touchstart", function () {
-			if( firstTime )  toggleFullScreen() ;
-			firstTime = false ; 
-
-		})
-		$('body').on("click", function () {
-			if( firstTime )  toggleFullScreen() ;
-			firstTime = false ; 
-
-		})
+		
 	}
 
 
@@ -214,10 +213,18 @@ function tick( t ) {
 	main.lastT = t
 	
 	main.timer -= dt/1000; ;
+
+	if( main.timer < 0 ) {
+		if( ! localStorage["bestScore"] ) localStorage["bestScore"] = 0 
+		localStorage["bestScore"] = Math.max( localStorage["bestScore"],  main.score  ) 
+		$("#GameScore").text(  main.score ) 
+		$("#BestGameScore").text(  localStorage["bestScore"] ) 
+		$('#myModal').modal()
+		return 
+	}
 	main.decayTimer += dt
 
-	if( main.decayTimer > 1000 ) {
-		console.log(main.currentMultiplier  )
+	if( main.decayTimer > 1000 ) {		
 		main.currentMultiplier *= 0.95
 		main.decayTimer = 0 
 	}
@@ -720,23 +727,12 @@ function getNoteByName( name ) { return NotesFrequency[ NoteName[ name ]]}
 			};
 		}());
 
-function toggleFullScreen() {
-	var doc = window.document;
-	var docEl = doc.documentElement;
 
-	var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-	var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-
-	if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-		requestFullScreen.call(docEl);
-	}
-	else {
-		cancelFullScreen.call(doc);
-	}
-}
 
 
 $(function() {
 	GameStart() ;
-
+$('#myModal').on('hidden.bs.modal', function (e) {
+ startAGame( main ) ; 
+})
 })

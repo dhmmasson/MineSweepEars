@@ -144,7 +144,23 @@ body {
  * Affix and center
  */
 
+.modal {
+
+  color : black ;
+}
+
 @media (min-width: 768px) {
+
+  @media (min-height: 600px) {
+.masthead {
+    position: fixed;
+    top: 0;
+  }
+  .mastfoot {
+   position: fixed;
+    bottom: 0;
+  }
+}
   /* Pull out the header and footer */
   .masthead {
    /* position: fixed;*/

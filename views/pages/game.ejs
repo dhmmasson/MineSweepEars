@@ -4,6 +4,7 @@
 	<% include ../partials/libs %>
 	
 	<link rel="stylesheet" type="text/css" href="css/stylesheets/style.css">
+	<script type="text/javascript"  src="/js/game.js"></script>
 	<title>LD32</title>
 </head>
 <body>
@@ -16,11 +17,13 @@
 
 				<div class="masthead clearfix">
 					<div class="inner">
-					<h3 class="masthead-brand">LD32</h3>
+					<h3 class="masthead-brand">MineSweepears island</h3>
 						<nav>
 							<ul class="nav masthead-nav">
-								<li class="active"><a href="#">Game</a></li>								
-								<li class="disabled"><a href="#">Contact</a></li>
+								<li class=""><a href="/">Home</a></li>	
+								<li class=""><a href="/Game">Game</a></li>	
+								<li class=""><button class="btn btn-primary" id="fullScreen">Go FullScreen</button></li>					
+								<li><a href="http://ludumdare.com/compo/ludum-dare-32/?action=preview&uid=51097">Contact</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -40,7 +43,36 @@
 						
 					</canvas>
 
+
+
 				</div>
+				</div><!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Game Over </h4>
+				      </div>
+				      <div class="modal-body">
+				       <div class="row">						 
+						  <div class="col-xs-6" id="">Your Score</div>
+						  <div class="col-xs-6" id="GameScore">0</div>
+						</div> 
+						<div class="row">						 
+						  <div class="col-xs-6" id="">Your Best Score</div>
+						  <div class="col-xs-6" id="BestGameScore">0</div>
+						</div>
+				      </div>
+
+				      
+				   
+				      <div class="modal-footer">
+				        <button id="restart "type="button" class="btn btn-default" data-dismiss="modal">Restart</button>				       
+				      </div> 
+				        </div>
+				    </div>
+				  </div>
 				<div class="mastfoot">
 					<div class="inner">
 						<p>LD32 by <a href="https://github.com/GameDhim/ld32">Dhim</a></p>

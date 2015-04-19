@@ -162,28 +162,46 @@ body {
 /*
  * Affix and center
  */
+/* line 147, ../sass/style.scss */
+.modal {
+  color: black;
+}
+
+@media (min-width: 768px) and (min-height: 600px) {
+  /* line 155, ../sass/style.scss */
+  .masthead {
+    position: fixed;
+    top: 0;
+  }
+
+  /* line 159, ../sass/style.scss */
+  .mastfoot {
+    position: fixed;
+    bottom: 0;
+  }
+}
 @media (min-width: 768px) {
   /* Pull out the header and footer */
-  /* line 149, ../sass/style.scss */
+  /* line 165, ../sass/style.scss */
   .masthead {
     /* position: fixed;*/
     top: 0;
   }
 
-  /* line 153, ../sass/style.scss */
+  /* line 169, ../sass/style.scss */
   .mastfoot {
     /* position: fixed;*/
     bottom: 0;
   }
 
   /* Start the vertical centering */
-  /* line 158, ../sass/style.scss */
+  /* line 174, ../sass/style.scss */
   .site-wrapper-inner {
     vertical-align: middle;
   }
 
   /* Handle the widths */
-  /* line 162, ../sass/style.scss */
+  /* line 178, ../sass/style.scss */
   .masthead,
   .mastfoot,
   .cover-container {
@@ -192,7 +210,7 @@ body {
   }
 }
 @media (min-width: 992px) {
-  /* line 170, ../sass/style.scss */
+  /* line 186, ../sass/style.scss */
   .masthead,
   .mastfoot,
   .cover-container {
