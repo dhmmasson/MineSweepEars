@@ -182,6 +182,11 @@ function UiInit ( main ) {
 			firstTime = false ; 
 
 		})
+		$('body').on("click", function () {
+			if( firstTime )  toggleFullScreen() ;
+			firstTime = false ; 
+
+		})
 	}
 
 
