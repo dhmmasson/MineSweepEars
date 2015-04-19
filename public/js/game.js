@@ -322,8 +322,8 @@ function soundInit( main ) {
 	main.audio.nextNote = 0
 
 	main.audio.bufferLoader = new BufferLoader( main.audio.ctx
-		,   [ {label : "explosion", url : "/sounds/mineExplosion.wav"}
-		   	,  {label : "cell", url : "/sounds/enterCell.wav"} ]
+		,   [ {label : "explosion", url : "https://dl.dropboxusercontent.com/s/ts1nvjdbmgvwjal/MineExplosion.wav?dl=0"}
+		   	,  {label : "cell", url : "https://dl.dropboxusercontent.com/s/eq0ulf6q6t5rwd2/enterCell.wav?dl=0"} ]
 		, function (buffers ){
 
 			main.audio.buffer =buffers 
