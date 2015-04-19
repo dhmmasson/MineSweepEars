@@ -3,7 +3,7 @@
 <head>
 	<% include ../partials/libs %>
 	
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/stylesheets/style.css">
 	<title>LD32</title>
 </head>
 <body>
@@ -26,11 +26,20 @@
 					</div>
 				</div>
 				<div class="inner cover">
-					<h1 class="cover-heading">LD32</h1>
-					<p class="lead"> This is my first LD32, you are on the blank page</p>
-					<p class="lead">
-						<a href="#" class="btn btn-lg btn-default" disabled="disabled">Play</a>
-					</p>
+				<div class="row">
+				  <div class="col-xs-4" id="">Time Remaining</div>
+				  <div class="col-xs-4" id="">Current line score</div>
+				  <div class="col-xs-4" id=""> Total score</div>
+				</div>
+				<div class="row">
+				  <div class="col-xs-4" id="timeRemaining">60</div>
+				  <div class="col-xs-4" id="currentLineScore">60</div>
+				  <div class="col-xs-4" id="score">0</div>
+				</div>
+					<canvas id="ld32Canvas">
+						
+					</canvas>
+
 				</div>
 				<div class="mastfoot">
 					<div class="inner">

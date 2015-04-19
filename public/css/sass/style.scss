@@ -2,6 +2,18 @@
  * Globals
  */
 
+
+canvas {
+
+  background: #009e8e ;//hsla(180, 80%, 40%, 0.91 ) ;
+  border: 1px inset hsla(0, 0%, 30%, 0.5 ) ;
+  width: 600px ; 
+  height: 600px 
+
+}
+
+
+/* Stuff from bootstrap examples */
 /* Links */
 a,
 a:focus,
@@ -135,11 +147,11 @@ body {
 @media (min-width: 768px) {
   /* Pull out the header and footer */
   .masthead {
-    position: fixed;
+   /* position: fixed;*/
     top: 0;
   }
   .mastfoot {
-    position: fixed;
+   /* position: fixed;*/
     bottom: 0;
   }
   /* Start the vertical centering */
@@ -161,3 +173,4 @@ body {
     width: 700px;
   }
 }
+  

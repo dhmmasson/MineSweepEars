@@ -1,0 +1,201 @@
+/*
+ * Globals
+ */
+/* line 6, ../sass/style.scss */
+canvas {
+  background: #009e8e;
+  border: 1px inset rgba(77, 77, 77, 0.5);
+  width: 600px;
+  height: 600px;
+}
+
+/* Stuff from bootstrap examples */
+/* Links */
+/* line 18, ../sass/style.scss */
+a,
+a:focus,
+a:hover {
+  color: #fff;
+}
+
+/* Custom default button */
+/* line 25, ../sass/style.scss */
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+  color: #333;
+  text-shadow: none;
+  /* Prevent inheritence from `body` */
+  background-color: #fff;
+  border: 1px solid #fff;
+}
+
+/*
+ * Base structure
+ */
+/* line 39, ../sass/style.scss */
+html,
+body {
+  height: 100%;
+  background-color: #333;
+}
+
+/* line 44, ../sass/style.scss */
+body {
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Extra markup and styles for table-esque vertical and horizontal centering */
+/* line 51, ../sass/style.scss */
+.site-wrapper {
+  display: table;
+  width: 100%;
+  height: 100%;
+  /* For at least Firefox */
+  min-height: 100%;
+  -webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+}
+
+/* line 59, ../sass/style.scss */
+.site-wrapper-inner {
+  display: table-cell;
+  vertical-align: top;
+}
+
+/* line 63, ../sass/style.scss */
+.cover-container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Padding for spacing */
+/* line 69, ../sass/style.scss */
+.inner {
+  padding: 30px;
+}
+
+/*
+ * Header
+ */
+/* line 77, ../sass/style.scss */
+.masthead-brand {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* line 82, ../sass/style.scss */
+.masthead-nav > li {
+  display: inline-block;
+}
+
+/* line 85, ../sass/style.scss */
+.masthead-nav > li + li {
+  margin-left: 20px;
+}
+
+/* line 88, ../sass/style.scss */
+.masthead-nav > li > a {
+  padding-right: 0;
+  padding-left: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  /* IE8 proofing */
+  color: rgba(255, 255, 255, 0.75);
+  border-bottom: 2px solid transparent;
+}
+
+/* line 97, ../sass/style.scss */
+.masthead-nav > li > a:hover,
+.masthead-nav > li > a:focus {
+  background-color: transparent;
+  border-bottom-color: #a9a9a9;
+  border-bottom-color: rgba(255, 255, 255, 0.25);
+}
+
+/* line 103, ../sass/style.scss */
+.masthead-nav > .active > a,
+.masthead-nav > .active > a:hover,
+.masthead-nav > .active > a:focus {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+@media (min-width: 768px) {
+  /* line 111, ../sass/style.scss */
+  .masthead-brand {
+    float: left;
+  }
+
+  /* line 114, ../sass/style.scss */
+  .masthead-nav {
+    float: right;
+  }
+}
+/*
+ * Cover
+ */
+/* line 124, ../sass/style.scss */
+.cover {
+  padding: 0 20px;
+}
+
+/* line 127, ../sass/style.scss */
+.cover .btn-lg {
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+/*
+ * Footer
+ */
+/* line 137, ../sass/style.scss */
+.mastfoot {
+  color: #999;
+  /* IE8 proofing */
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/*
+ * Affix and center
+ */
+@media (min-width: 768px) {
+  /* Pull out the header and footer */
+  /* line 149, ../sass/style.scss */
+  .masthead {
+    /* position: fixed;*/
+    top: 0;
+  }
+
+  /* line 153, ../sass/style.scss */
+  .mastfoot {
+    /* position: fixed;*/
+    bottom: 0;
+  }
+
+  /* Start the vertical centering */
+  /* line 158, ../sass/style.scss */
+  .site-wrapper-inner {
+    vertical-align: middle;
+  }
+
+  /* Handle the widths */
+  /* line 162, ../sass/style.scss */
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 100%;
+    /* Must be percentage or pixels for horizontal alignment */
+  }
+}
+@media (min-width: 992px) {
+  /* line 170, ../sass/style.scss */
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 700px;
+  }
+}
