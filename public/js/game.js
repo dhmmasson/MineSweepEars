@@ -81,13 +81,14 @@ function UiInit ( main ) {
 
 				for( var i = 0 ; i < 6 ; i++ ) {
 					if( spot.neighbourgs[i] && spot.neighbourgs[i].mine )
-						playNote( main, spot.neighbourgs[i].x, spot.neighbourgs[i].y )
+						spot.play( main ) 
+						//playNote( main, spot.neighbourgs[i].x, spot.neighbourgs[i].y )
 				}
 				
 				main.change = true ;
 				main.ui.action = "drag" 
 
-				main.currentScore = spot.countMine ; 
+				main.currentScore = 0 ; 
 				main.currentMultiplier = 1 ;
 
 			}
@@ -101,6 +102,10 @@ function UiInit ( main ) {
 		
 		//main.change = true ;
 		main.score += Math.round( main.currentScore * main.currentMultiplier ) 
+		for( var i = 0 ; i < main.spots.length ; i++ ) {			
+			main.spots[i].stop( main ) 
+				//playNote( main, spot.neighbourgs[i].x, spot.neighbourgs[i].y )
+		}
 	}
 	, dragMove = function( e ) { 
 
@@ -116,20 +121,20 @@ function UiInit ( main ) {
 		x = 2 * e.offsetX / main.canvas.w - 1 ;
 		y = 2 * e.offsetY / main.canvas.h - 1 ;
 		main.ui.mousePosition = {x : x, y : y }
+		main.audio.ctx.listener.setPosition(main.audio.Mult  * x, main.audio.Mult  *  y, 0);
 
 		if( main.ui.action == "drag" ) {
 			//check if 
-			
-			main.audio.ctx.listener.setPosition(main.audio.Mult  * x, main.audio.Mult  *  y, 0);
 			
 			dx = x - main.ui.lastSpot.x
 			dy = y - main.ui.lastSpot.y
 			var n = norm(dx,dy)
 			dx/= n
 			dy/= n
-			//main.audio.ctx.listener.setOrientation( dx, 0, -dy, 0, -1 , 0);
+			main.audio.ctx.listener.setOrientation( dy, 0, dx, 0 ,-1, 0);
 
-
+			main.change= true ; 
+		
 
 			var spot = findSpot( main, x, y ) ; 
 			if( spot ) {
@@ -138,6 +143,12 @@ function UiInit ( main ) {
 				main.ui.action = "drag" 
 
 				if( spot != main.ui.lastSpot ) {
+					for( var i = 0 ; i < 6 ; i++ ) {
+					if( main.ui.lastSpot.neighbourgs[i] && main.ui.lastSpot.neighbourgs[i].mine )
+						main.ui.lastSpot.neighbourgs[i].stop( main ) 
+						//playNote( main, spot.neighbourgs[i].x, spot.neighbourgs[i].y )
+					}
+
 					playSound( main, "cell" )
 					reveal( main, spot )
 					
@@ -149,7 +160,8 @@ function UiInit ( main ) {
 
 						for( var i = 0 ; i < 6 ; i++ ) {
 							if( spot.neighbourgs[i] && spot.neighbourgs[i].mine )
-								playNote( main, spot.neighbourgs[i].x, spot.neighbourgs[i].y )
+								spot.neighbourgs[i].play(main)
+								//playNote( main, spot.neighbourgs[i].x, spot.neighbourgs[i].y )
 						}
 						if( spot.visited ) return 
 
@@ -193,7 +205,7 @@ function UiInit ( main ) {
 
 		for( var i = 0 ; i < main.spots.length ; i++ ) {
 			var spot = main.spots[i] ;
-			if( (spot.x - x )*(spot.x - x ) + (spot.y - y )*(spot.y - y ) < l * l * 0.8) {
+			if( (spot.x - x )*(spot.x - x ) + (spot.y - y )*(spot.y - y ) < l * l * 0.5) {
 
 				return spot ; 
 			}
@@ -324,7 +336,7 @@ function soundInit( main ) {
 
 	//Include audio in the main object 
 	main.audio = audio ; 
-	main.audio.Mult = 2 ;
+	main.audio.Mult = 20 ;
 	main.audio.music = ["G4", "C4", "E4", "A4"]
 	main.audio.nextNote = 0
 
@@ -493,35 +505,64 @@ function Spot( x, y, freq ) {
 	this.y = y ; 
 	this.freq = freq ; 
 	this.panner = main.audio.ctx.createPanner();
+	this.oscillator = createOscillator( main.audio.ctx, getNoteByName(main.audio.music[ rd(4) ]) , main.audio.ctx.currentTime, 20000, this.panner )  ;
 	this.neighbourgs = [] ; 
 	this.neighbourgsCount = 0 
 	this.color = "yellow"
 	this.mine = Math.random() > 0.7
 	this.countMine = 0 ; 
 	this.visible = false ;
-}
-Spot.prototype.play = function( main ) {
+	this.panner.setPosition( this.x *main.audio.Mult  , this.y * main.audio.Mult  ,  -0.5 ) ;
 
-	this.panner.setPosition( this.x * distMult , this.y * distMult  ,  -0.5 ) ;
-	this.panner.connect( main.audio.soundConnector  )
+}
+Spot.prototype.play = function( main ) {	
+	
 	var panner = this.panner ; 
-	setInterval( function() { createOscillator( main.audio.ctx, 220, main.audio.ctx.currentTime, 200, panner ) }, Math.random() * 200 + 100 ) ;
+	this.panner.connect( main.audio.soundConnector  )
+	this.oscillator.play( main.audio.ctx )	
+}
+Spot.prototype.stop = function( main ) {
+
+	
+	//this.panner.disconnect( 0 )
+	this.oscillator.stop( main.audio.ctx )
+	
 }
 
 function reveal( main, spot ) {
-	if( spot.visible ) return 
-		spot.visible = true ; 
-	spot.color += "Bright"
+	console.log( "reveal ")
+	//if( spot.visible ) return 
+
+	if( spot.visible ){
+		var c = 0 
+		for( var i = 0 ; i < 6 ; i++ ) {
+			if( spot.neighbourgs[i] &&  spot.neighbourgs[i].visible &&  spot.neighbourgs[i].mine ) c++ 
+		}
+			console.log( c )
+		if( c >= spot.countMine ) {
+			for( var i = 0 ; i < 6 ; i++ ) {
+				if( spot.neighbourgs[i] && !spot.neighbourgs[i].visible) reveal( main, spot.neighbourgs[i] ) ;
+			}
+		}
+
+	} else {
+
+
+	}
+
+	spot.visible = true ; 
+	
 	if( spot.mine ) {
 		spot.color = "red" ;
 	}
 
 	if( spot.countMine == 0 || spot.countMine == spot.neighbourgsCount) {
-		for( var i = 0 ; i < spot.neighbourgs.length ; i++ ) {
-			if( spot.neighbourgs[i] ) reveal( main, spot.neighbourgs[i] ) ;
+		for( var i = 0 ; i < 6 ; i++ ) {
+			if( spot.neighbourgs[i] && !spot.neighbourgs[i].visible) reveal( main, spot.neighbourgs[i] ) ;
 		}
 	}
 
+	
 }
 
 function updateScreen( main ) {
@@ -603,7 +644,8 @@ function updateScreen( main ) {
 		
 
 		//Hexagone
-		ctx.fillStyle = main.colors[ main.spots[i].color ]; //"rgb("+c+","+c+",120)"
+		
+		ctx.fillStyle = main.colors[ main.spots[i].color  + ((main.spots[i].visible ) ? "Bright" : "" )]; //"rgb("+c+","+c+",120)"
 		//ctx.fillStyle = main.screen.pattern
 		ctx.beginPath();	
 		ctx.moveTo( (1 + main.spots[i].x + directions2[5].x * l )/2 * main.screen.w  

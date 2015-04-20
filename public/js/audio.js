@@ -1,8 +1,8 @@
 (function(w){
 
-	var attack = 10 //ms
-	, decay    = 30 //ms
-	, sustain  = 50
+	var attack = 100 //ms
+	, decay    = 100 //ms
+	, sustain  = 100
 
 	var createOscillator = function( audioContext, freq, start, dt, output ) {
 		if( dt < attack + decay + sustain ) console.warn( "sound to small" ) ;
@@ -12,38 +12,33 @@
 		var gain = audioContext.createGain()
 		,   osc = audioContext.createOscillator() ;
 		
-		gain.value = 0.1 
+		gain.value = 0
 		gain.connect( output || audioContext.destination ) ;
 		osc.frequency.value = freq ;
 		osc.type = "sine" ;
+		osc.start(start);
+
 
 		osc.connect( gain );
 
+		return { gain : gain, osc : osc 
+			, play : function ( ctx )  {
+				//0 at first 
+				this.gain.gain.setValueAtTime( 0, ctx.currentTime );
+				//Attack
+				this.gain.gain.exponentialRampToValueAtTime( 0.9, ctx.currentTime + attack / 1000 );
+			}
+			, stop : function ( ctx ) {
+				this.gain.gain.setValueAtTime( 0.9, ctx.currentTime );
+				this.gain.gain.linearRampToValueAtTime( 0.1, ctx.currentTime + decay/1000 +sustain/1000  );
+				//ramp down from sustain to 0 at the end
+				this.gain.gain.linearRampToValueAtTime( 0, ctx.currentTime + decay/1000 +sustain/1000  );
+			}
 
+		}
 		//Audio shape
 
-		//0 at first 
-		gain.gain.setValueAtTime( 0.1, start );
-
-		//Attack
-		gain.gain.exponentialRampToValueAtTime( 0.9, start + attack / 1000 );
-
-		//ramp down from decay to sustain
-		gain.gain.setValueAtTime( 0.9, start + dt - decay/1000 );
-		gain.gain.linearRampToValueAtTime( 0.1, start + dt - sustain/1000  );
-
-		//ramp down from sustain to 0 at the end
-		gain.gain.linearRampToValueAtTime( 0, start + dt );
-
-		osc.start(start);
-		osc.stop(start+dt +100)
-
-		//disconnect everything
-		osc.onended = function() {	            
-			osc.stop(100);
-			osc.disconnect(gain);
-			gain.disconnect(audioContext.destination);
-		}
+		
 
 
 	}
