@@ -1,7 +1,7 @@
 //game.js
 
 
-var l = 0.1 ; 
+var l = 0.07 ; 
 //Core function to be call on init 
 function GameStart () {
 	window.scrollTo(0,1);
@@ -19,7 +19,7 @@ function GameStart () {
 }
 
 function startAGame( main ) {
-
+	webGlInit( main ) ; 
 	createSpots( main ) ;  
 	colorSpots( main ) ; 
 	reveal( main, main.spots[0] )
@@ -237,7 +237,7 @@ function tick( t ) {
 	main.decayTimer += dt
 
 	if( main.decayTimer > 1000 ) {		
-		main.currentMultiplier *= 0.95
+		main.currentMultiplier *= 0.99
 		main.decayTimer = 0 
 	}
 
@@ -259,11 +259,17 @@ function webGlInit( main ) {
 	main.screen = {}  ; 
 	canvas = $('canvas')[0]
 	main.canvas = {}
+
+	var s = Math.min($(canvas).width(), $(window).height() - $("#ld32Canvas").offset().top )
+$(canvas).width(s)  
+$(canvas).height(s) 
 	main.canvas.w = $(canvas).width()  ; 
 	main.canvas.h = $(canvas).height() ; 
 
-	main.screen.w = 512 
-	main.screen.h= 512 
+
+
+	main.screen.w =s
+	main.screen.h= main.screen.w
 
 	canvas.width  = main.screen.w;
 	canvas.height = main.screen.h; 
@@ -530,16 +536,20 @@ Spot.prototype.stop = function( main ) {
 }
 
 function reveal( main, spot ) {
-	console.log( "reveal ")
+	
 	//if( spot.visible ) return 
 
 	if( spot.visible ){
-		var c = 0 
+		var cache = 0, mineVisible = 0 
+
 		for( var i = 0 ; i < 6 ; i++ ) {
-			if( spot.neighbourgs[i] &&  spot.neighbourgs[i].visible &&  spot.neighbourgs[i].mine ) c++ 
+			if( spot.neighbourgs[i] ) {
+				if( !spot.neighbourgs[i].visible ) cache ++
+				if( spot.neighbourgs[i].visible && spot.neighbourgs[i].mine ) mineVisible ++
+			}
 		}
-			console.log( c )
-		if( c >= spot.countMine ) {
+			
+		if( cache <= spot.countMine - mineVisible || (spot.countMine - mineVisible == 0 ) ) {
 			for( var i = 0 ; i < 6 ; i++ ) {
 				if( spot.neighbourgs[i] && !spot.neighbourgs[i].visible) reveal( main, spot.neighbourgs[i] ) ;
 			}
@@ -774,6 +784,10 @@ function getNoteByName( name ) { return NotesFrequency[ NoteName[ name ]]}
 
 $(function() {
 	GameStart() ;
+	$("#startGame").click( function () {
+
+		 startAGame( main ) ; 
+	}) 
 $('#myModal').on('hidden.bs.modal', function (e) {
  startAGame( main ) ; 
 })

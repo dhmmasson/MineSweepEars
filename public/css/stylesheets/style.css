@@ -5,7 +5,7 @@
 canvas {
   background: #009e8e;
   border: 1px inset rgba(77, 77, 77, 0.5);
-  width: 600px;
+  width: 100%;
   height: 600px;
 }
 
@@ -170,13 +170,13 @@ body {
 @media (min-width: 768px) and (min-height: 600px) {
   /* line 155, ../sass/style.scss */
   .masthead {
-    position: fixed;
+    /*position: fixed;*/
     top: 0;
   }
 
   /* line 159, ../sass/style.scss */
   .mastfoot {
-    position: fixed;
+    /*position: fixed;*/
     bottom: 0;
   }
 }
@@ -207,13 +207,5 @@ body {
   .cover-container {
     width: 100%;
     /* Must be percentage or pixels for horizontal alignment */
-  }
-}
-@media (min-width: 992px) {
-  /* line 186, ../sass/style.scss */
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 700px;
   }
 }

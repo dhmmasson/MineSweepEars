@@ -21,7 +21,7 @@
 						<nav>
 							<ul class="nav masthead-nav">
 								<li class=""><a href="/">Home</a></li>	
-								<li class=""><a href="/Game">Game</a></li>	
+								<li class=""><a id="startGame">Game</a></li>	
 								<li class=""><button class="btn btn-primary" id="fullScreen">Go FullScreen</button></li>					
 								<li><a href="http://ludumdare.com/compo/ludum-dare-32/?action=preview&uid=51097">Contact</a></li>
 							</ul>
@@ -29,15 +29,17 @@
 					</div>
 				</div>
 				<div class="inner cover">
-				<div class="row">
-				  <div class="col-xs-4" id="">Time Remaining</div>
-				  <div class="col-xs-4" id="">Current line score</div>
-				  <div class="col-xs-4" id=""> Total score</div>
-				</div>
-				<div class="row">
-				  <div class="col-xs-4" id="timeRemaining">60</div>
-				  <div class="col-xs-4" id="currentLineScore">60</div>
-				  <div class="col-xs-4" id="score">0</div>
+				<div class="container" id="scoreBoard" >
+					<div class="row">
+					  <div class="col-xs-4" id="">Time Remaining</div>
+					  <div class="col-xs-4" id="">Current line score</div>
+					  <div class="col-xs-4" id=""> Total score</div>
+					</div>
+					<div class="row">
+					  <div class="col-xs-4" id="timeRemaining">60</div>
+					  <div class="col-xs-4" id="currentLineScore">60</div>
+					  <div class="col-xs-4" id="score">0</div>
+					</div>
 				</div>
 					<canvas id="ld32Canvas">
 						

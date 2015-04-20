@@ -7,7 +7,7 @@ canvas {
 
   background: #009e8e ;//hsla(180, 80%, 40%, 0.91 ) ;
   border: 1px inset hsla(0, 0%, 30%, 0.5 ) ;
-  width: 600px ; 
+  width: 100% ; 
   height: 600px 
 
 }
@@ -153,11 +153,11 @@ body {
 
   @media (min-height: 600px) {
 .masthead {
-    position: fixed;
+    /*position: fixed;*/
     top: 0;
   }
   .mastfoot {
-   position: fixed;
+   /*position: fixed;*/
     bottom: 0;
   }
 }
@@ -186,7 +186,7 @@ body {
   .masthead,
   .mastfoot,
   .cover-container {
-    width: 700px;
+    
   }
 }
   
