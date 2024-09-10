@@ -284,18 +284,18 @@ $(canvas).height(s)
 		main.change = true ; 
 
 	};
-	imageObj.src = '/img/waves3.png';
+	imageObj.src = '/MineSweepEars/img/waves3.png';
 
 	var imageObj2 = new Image();
 	imageObj2.onload = function() {
 		main.screen.pattern2 = main.screen.ctx.createPattern(imageObj2, 'repeat'); 
 		main.change = true ; 
 	};
-	imageObj2.src = '/img/sand.png';
+	imageObj2.src = '/MineSweepEars/img/sand.png';
 
 
 	var backgroundImage = new Image();
-	backgroundImage.src = '/img/background.png';
+	backgroundImage.src = '/MineSweepEars/img/background.png';
 
 	backgroundImage.onload = function() {
 		backgroundImage.width = "600px"
