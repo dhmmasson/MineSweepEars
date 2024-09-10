@@ -18,3 +18,20 @@ mkdir -p docs/game/
 npx ejs views/pages/landing.ejs -o docs/index.html
 npx ejs views/pages/game.ejs -o docs/game/index.html
 ```
+
+## Cite this repository
+```APA
+Masson, D. (2015). MineSweepEar Island (Version v1.1.0) [Computer software]. https://doi.org/10.5281/zenodo.13743147
+```
+
+```bibtex
+@software{Masson2015_MineSweepEar,
+    author = {Masson, Dimitri},
+    license = {MIT},
+    month = apr,
+    title = {{MineSweepEar Island}},
+    url = {https://github.com/dhmmasson/MineSweepEars/tree/v1.0.0},
+    version = {v1.0.0},
+    year = {2015}
+}
+```

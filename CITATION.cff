@@ -12,8 +12,8 @@ authors:
 identifiers:
   - type: doi
     value: 10.5281/zenodo.13743147
-repository-code: 'https://github.com/dhmmasson/KeepTheBeesAlive/tree/v2.0.0'
-url: 'https://dhmmasson.github.io/KeepTheBeesAlive/keepTheBeeAlive-PostMortem'
+repository-code: 'https://github.com/dhmmasson/MineSweepEars/tree/v1.1.0'
+url: 'https://dhmmasson.github.io/MineSweepEars/'
 abstract: >-
   MineSweepears Island is a hex-based puzzle game
   inspired by Minesweeper, where players use spatial
@@ -25,5 +25,5 @@ keywords:
   - Game
   - Web
 license: MIT
-version: v2.0.0
+version: v1.1.0
 date-released: '2015-04-20'
