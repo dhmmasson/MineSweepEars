@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+title: MineSweepEar Island
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Dimitri
+    family-names: Masson
+    orcid: 'https://orcid.org/0000-0002-7072-3146'
+    email: dhm.masson@gmail.com
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.13743147
+repository-code: 'https://github.com/dhmmasson/KeepTheBeesAlive/tree/v2.0.0'
+url: 'https://dhmmasson.github.io/KeepTheBeesAlive/keepTheBeeAlive-PostMortem'
+abstract: >-
+  MineSweepears Island is a hex-based puzzle game
+  inspired by Minesweeper, where players use spatial
+  audio cues to detect hidden mines. Created for 
+  Ludum Dare 32, the game blends strategy with 
+  innovative sound-based gameplay
+keywords:
+  - Ludum Dare
+  - Game
+  - Web
+license: MIT
+version: v2.0.0
+date-released: '2015-04-20'
