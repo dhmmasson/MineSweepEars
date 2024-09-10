@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/GameDhim/ld32",
   "dependencies": {
-    "ejs": "^2.3.1",
+    "ejs": "^3.1.10",
+    "ejs-lint": "^2.0.0",
     "express": "^4.12.3"
   }
 }
